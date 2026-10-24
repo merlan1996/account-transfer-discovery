@@ -1,0 +1,60 @@
+ID,Year,Source type,Account type,Transfer kind,Journey step,Pain type,Days waited,Outcome
+P001,2025,Forum,RRSP,In-kind,3 Submitting request,Other,,Unknown
+P002,2025,Forum,RRSP,Unknown,8 After arrival,Positive,,Completed
+P003,2018,Forum,TFSA,Unknown,4 Request between firms,Rejected or form error,,Gave up / cancelled
+P004,2026,Review site,TFSA,Unknown,3 Submitting request,Support hard to reach,,Still stuck
+P005,2025,App store,Unknown,Unknown,5 Waiting,Slow,,Completed
+P006,2021,Forum,RRSP,Unknown,5 Waiting,Slow,,Still stuck
+P007,2021,Forum,Unknown,Unknown,5 Waiting,Other,,Completed
+P008,2021,Forum,RRSP,Cash,5 Waiting,Positive,14,Completed
+P009,2024,Forum,RRSP,Unknown,5 Waiting,Slow,,Completed
+P010,2024,Forum,Several,Unknown,5 Waiting,Slow,,Completed
+P011,2023,Forum,Several,Unknown,4 Request between firms,Slow,,Completed
+P012,2026,Forum,Several,In-kind,5 Waiting,Other,14,Still stuck
+P013,2026,Forum,Unknown,Unknown,4 Request between firms,Rejected or form error,,Unknown
+P014,2026,Forum,Unknown,Unknown,6 Assets moving,Positive,,Completed
+P015,2024,Forum,Several,In-kind,3 Submitting request,Other,,Unknown
+P016,2024,Forum,Unknown,In-kind,8 After arrival,Positive,,Completed
+P017,2020,Forum,TFSA,Unknown,5 Waiting,Positive,14,Completed
+P018,2025,Forum,RESP,Cash,4 Request between firms,No status,,Gave up / cancelled
+P019,2025,Forum,RESP,Unknown,6 Assets moving,Other,,Completed
+P020,2026,Review site,TFSA,Unknown,7 Fees and refunds,Fee surprise,21,Completed
+P021,2026,Review site,TFSA,Unknown,4 Request between firms,Rejected or form error,,Still stuck
+P022,2025,Review site,RESP,Unknown,5 Waiting,Slow,,Still stuck
+P023,2025,Review site,Several,Unknown,5 Waiting,Slow,,Completed
+P024,2025,Review site,Unknown,Unknown,4 Request between firms,Support hard to reach,,Still stuck
+P025,2025,Review site,RESP,Unknown,5 Waiting,Slow,,Still stuck
+P026,2025,Review site,Unknown,Unknown,5 Waiting,Slow,,Still stuck
+P027,2026,Review site,Unknown,Unknown,6 Assets moving,Partial or wrong transfer,,Partly completed
+P028,2025,Review site,RRSP,Unknown,5 Waiting,Slow,,Still stuck
+P029,2025,Review site,RESP,Unknown,4 Request between firms,Rejected or form error,,Still stuck
+P030,2025,Review site,RRSP,Unknown,7 Fees and refunds,Fee surprise,,Still stuck
+P031,2026,Review site,Unknown,Unknown,5 Waiting,Slow,,Completed
+P032,2025,Review site,Several,Unknown,3 Submitting request,Other,,Unknown
+P033,2025,Review site,RRSP,Unknown,4 Request between firms,Other,,Unknown
+P034,2024,Review site,Unknown,Unknown,5 Waiting,No status,35,Still stuck
+P035,2026,Review site,Unknown,Unknown,4 Request between firms,Other,,Still stuck
+P036,2023,Forum,RRSP,Unknown,2 Opening new account,Other,,Unknown
+P037,2022,Forum,RRSP,In-kind,6 Assets moving,Other,,Completed
+P038,2022,Forum,RRSP,Unknown,3 Submitting request,Positive,,Completed
+P039,2022,Forum,Several,Unknown,7 Fees and refunds,Fee surprise,,Completed
+P040,2024,Forum,Unknown,In-kind,7 Fees and refunds,Fee surprise,,Completed
+P041,2022,Forum,Unknown,Unknown,8 After arrival,Other,,Completed
+P042,2023,Forum,RESP,Cash,8 After arrival,Other,,Completed
+P043,2023,Forum,Unknown,Mixed,4 Request between firms,Rejected or form error,,Unknown
+P044,2023,Forum,Unknown,In-kind,4 Request between firms,Other,,Still stuck
+P045,2026,Review site,TFSA,Unknown,7 Fees and refunds,Fee surprise,,Completed
+P046,2026,Review site,Several,Unknown,4 Request between firms,Partial or wrong transfer,,Unknown
+P047,2026,Review site,TFSA,Unknown,8 After arrival,Partial or wrong transfer,,Unknown
+P048,2026,Review site,RESP,Unknown,6 Assets moving,Positive,,Completed
+P049,2026,Review site,Unknown,Unknown,7 Fees and refunds,Fee surprise,,Unknown
+P050,2025,Review site,FHSA,Unknown,5 Waiting,No status,,Still stuck
+P051,2025,Review site,RESP,Unknown,5 Waiting,Slow,,Still stuck
+P052,2024,Forum,Unknown,Unknown,5 Waiting,Slow,,Completed
+P053,2025,Review site,Several,Unknown,1 Choosing a firm,Positive,,Completed
+P054,2025,Review site,Unknown,In-kind,4 Request between firms,Other,,Unknown
+P055,2023,Review site,Unknown,Unknown,5 Waiting,Slow,,Still stuck
+P056,2025,Review site,Unknown,Unknown,4 Request between firms,Rejected or form error,,Still stuck
+P057,2026,Review site,TFSA,Unknown,5 Waiting,Slow,,Still stuck
+P058,2024,Review site,Unknown,Cash,4 Request between firms,Other,,Unknown
+P059,2025,Review site,RRSP,Unknown,4 Request between firms,Rejected or form error,,Still stuck

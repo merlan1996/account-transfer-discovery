@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maple Invest transfer concept</title>
+<style>
+:root{--ink:#1d2433;--mute:#566074;--line:#d5dae3;--bg:#f5f7fa;--pri:#0b5d5b;--ok:#14633a;--okBg:#e6f5ec;--warn:#7a4b00;--warnBg:#fff4de;--bad:#a4262c;--badBg:#fdeceb}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+.banner{background:#ffe08a;color:var(--ink);text-align:center;font-size:14px;font-weight:600;padding:8px 16px;position:sticky;top:0;z-index:1}
+.wrap{max-width:640px;margin:0 auto;padding:16px}
+.brand{margin:0 0 12px;font-weight:700;color:var(--pri)}
+.card,.demo{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.demo{margin-top:16px;border:2px dashed #8a93a5}
+h1{font-size:22px;line-height:1.25;margin:8px 0}
+h2{font-size:17px;margin:0 0 6px}
+h1:focus{outline:none}
+input,select,button{scroll-margin-top:80px}
+:focus-visible{outline:3px solid #1a5fd0;outline-offset:2px}
+.muted,.hint,footer{color:var(--mute);font-size:14px}
+.stepn{margin:0;color:var(--mute);font-size:14px}
+.bar{display:flex;gap:4px;margin:6px 0}
+.bar i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.bar i.on{background:var(--pri)}
+label{display:block;margin-top:14px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;margin:0;padding:8px 0;font-weight:400}
+input[type=radio],input[type=checkbox]{width:20px;height:20px;flex:none;margin:2px 0 0}
+input:not([type]),select{width:100%;min-height:44px;font:inherit;padding:8px 10px;margin-top:4px;border:1px solid #8a93a5;border-radius:8px;background:#fff;color:var(--ink)}
+input[aria-invalid=true],select[aria-invalid=true]{border:2px solid var(--bad)}
+fieldset{border:0;padding:0;margin:16px 0 0}
+legend{font-weight:600;padding:0}
+.hint,.err{margin:4px 0 0}
+.err{color:var(--bad);font-size:14px;font-weight:600}
+.err:empty,#combo:empty{display:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+button{font:inherit;font-weight:600;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--pri);background:#fff;color:var(--pri);cursor:pointer}
+button.pri{background:var(--pri);color:#fff}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.link{border:0;min-height:0;padding:2px 0;background:none;text-decoration:underline;text-align:left}
+.ok{--c:var(--ok);--b:var(--okBg)}.warn{--c:var(--warn);--b:var(--warnBg)}.bad{--c:var(--bad);--b:var(--badBg)}.info{--c:#174ea6;--b:#e8f0fe}
+.box{background:var(--b);border-left:4px solid var(--c);border-radius:8px;padding:12px;margin:12px 0}
+.box h2{color:var(--c)}
+.box p{margin:6px 0}
+.box ul{margin:6px 0;padding-left:20px}
+.pill{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:700;background:var(--b);color:var(--c);margin:8px 0}
+.hold{list-style:none;padding:0;margin:8px 0}
+.hold li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.summary div{padding:6px 0;border-bottom:1px solid var(--line)}
+.summary dt{color:var(--mute);font-size:14px}
+.summary dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.hist{padding-left:20px}
+footer{margin-top:16px}
+</style>
+</head>
+<body>
+<div class="banner">Concept prototype — fictional firm — not affiliated with any institution</div>
+<noscript>This prototype needs JavaScript.</noscript>
+<div class="wrap">
+  <p class="brand">Maple Invest · Transfer an account to us</p>
+  <main class="card" id="main"></main>
+  <section class="demo" aria-labelledby="dh">
+    <h2 id="dh">Demo controls</h2>
+    <p class="muted">Sample values: Aspen Direct Investing, account 12345678, name Jordan Lee. After you submit, play the sending firm:</p>
+    <div class="row">
+      <button type="button" data-d="Accepted by sending firm">Sending firm accepts</button>
+      <button type="button" data-d="Rejected: action needed">Sending firm rejects (account number mismatch)</button>
+      <button type="button" data-d="reset">Reset demo</button>
+    </div>
+  </section>
+  <footer>
+    <p>Self-initiated concept; public data; not affiliated with any institution. Maple Invest, the other firms, the customer and all figures are fictional. Built by AI agents from the requirements document; reviewed by the author.</p>
+    <p>Must-have stories shown on this screen: <span id="req"></span></p>
+  </footer>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+const money = n => n.toLocaleString('en-CA', {style: 'currency', currency: 'CAD'});
+const now = () => new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 16).replace('T', ' ');
+const norm = s => s.replace(/[\s-]/g, '').toUpperCase();
+const PROFILE = 'Jordan Lee', CASH = 1200;
+const T = {tfsa: 'TFSA', rrsp: 'RRSP', nonreg: 'Non-registered'}, KIND = {inkind: 'In kind', cash: 'Cash'};
+const FIRMS = {
+  aspen: {n: 'Aspen Direct Investing', re: /^\d{8}$/, rule: '8 digits', ex: '12345678', fee: 150},
+  birch: {n: 'Birch Bank Invest', re: /^[A-Z]{2}\d{6}$/, rule: '2 capital letters then 6 digits', ex: 'AB123456', fee: 100},
+  cedar: {n: 'Cedar Wealth', re: /^\d{9}$/, rule: '9 digits', ex: '123456789', fee: 125}
+};
+const HOLD = [['Prairie Index ETF', '120 units'], ['Aurora Growth Fund', '85 units'], ['Orchard Tech Inc.', '0.37 shares (fractional)']];
+const REQ = {1: 'inputs for S2 (R2)', 2: 'S1, S2 (R1, R2)', 3: 'S3 (R3, R4)', 4: 'S4 (R5)', 5: 'S5, S6 (R6, R7)'};
+const init = () => ({scr: 1, acct: 'tfsa', kind: 'inkind', from: 'tfsa', firm: '', num: '', name: '', nameOk: false,
+  frac: '', fee: '', agree: false, sign: '', status: '', hist: [], ref: '', t: {}});
+let S = init();
+
+const same = v => v.trim().toLowerCase() === PROFILE.toLowerCase();
+const numMsg = v => { const f = FIRMS[S.firm];
+  return !f ? 'Account number: choose your current firm first.' : f.re.test(norm(v)) ? ''
+    : `Account number: ${f.n} numbers are ${f.rule} (for example ${f.ex}).`; };
+const E = {
+  firm: () => S.firm ? '' : 'Current firm: choose your firm from the list.',
+  num: () => numMsg(S.num),
+  name: () => !S.name.trim() ? 'Name on your current account: enter it as shown on your statement.'
+    : same(S.name) || S.nameOk ? '' : `This name differs from your Maple Invest profile (${PROFILE}). Confirm it is your account, or correct the name.`
+};
+// Rules table (R2): a disallowed combination returns [reason, action, button label, optional extra route].
+const block = () => {
+  if (S.kind === 'inkind' && S.from === 'nonreg' && S.acct !== 'nonreg')
+    return [`Maple Invest does not allow moving securities in kind from a non-registered account into ${S.acct === 'rrsp' ? 'an' : 'a'} ${T[S.acct]}.`, 'cash', 'Switch to a cash transfer',
+      'Another route: transfer to a non-registered account first, then contribute.'];
+  if (S.from !== 'nonreg' && S.from !== S.acct)
+    return [`Maple Invest moves a ${T[S.from]} only into a ${T[S.from]}, not into a ${T[S.acct]}.`, 'same', `Open a ${T[S.from]} at Maple Invest instead`];
+};
+const issues = () => S.kind === 'cash' ? [] : [
+  ...S.frac ? [] : ['Orchard Tech Inc.: sell it first or move it as cash'],
+  ...S.fee ? [] : ['Cash for the fee: choose how much cash to move']];
+const canSign = () => !issues().length && S.agree && same(S.sign);
+
+const opts = (o, sel) => Object.entries(o).map(([k, v]) => `<option value="${k}"${k === sel ? ' selected' : ''}>${v.n || v}</option>`).join('');
+const radio = (k, v, l) => `<label class="opt"><input type="radio" name="${k}" id="${k}-${v}" value="${v}" data-k="${k}"${S[k] === v ? ' checked' : ''}><span>${l}</span></label>`;
+const check = (k, l) => `<label class="opt"><input type="checkbox" id="${k}" data-k="${k}"${S[k] ? ' checked' : ''}><span>${l}</span></label>`;
+const nav = l => `<div class="row">${S.scr > 1 ? `<button type="button" data-go="${S.scr - 1}">Back</button>` : ''}<button class="pri">${l}</button></div>`;
+const set = (id, h) => { const el = $('#' + id); if (el.dataset.h !== h) { el.dataset.h = h; el.innerHTML = h; } };
+const summary = () => { const f = FIRMS[S.firm], r = [['Maple Invest account', T[S.acct]], ['Transfer kind', KIND[S.kind]],
+  ['Current account', `${f.n}, ${T[S.from]}, •••• ${esc(norm(S.num).slice(-4))}`], ['Name on that account', esc(S.name)]];
+  if (S.kind === 'inkind') r.push(['Moves in kind', 'Prairie Index ETF, Aurora Growth Fund'],
+    ['Orchard Tech Inc.', {sell: 'You sell it first', cash: 'Moves as cash'}[S.frac] || 'Not chosen yet'],
+    ['Cash to move', {leave: `${money(CASH - f.fee)} (${money(f.fee)} stays for the fee)`, all: `${money(CASH)} (all; may be rejected)`}[S.fee] || 'Not chosen yet']);
+  return `<dl class="summary">${r.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>`; };
+
+// Screen 1: account type and transfer kind
+const s1 = () => `<form id="f1"><h1 tabindex="-1">Choose your account and transfer kind</h1>
+  <p class="muted">Tell us what you are moving. This concept covers TFSA and RRSP.</p>
+  <fieldset><legend>Account to open at Maple Invest</legend>${radio('acct', 'tfsa', 'TFSA')}${radio('acct', 'rrsp', 'RRSP')}</fieldset>
+  <fieldset><legend>Transfer kind</legend>
+    ${radio('kind', 'inkind', 'In kind (keep your investments as they are)')}
+    ${radio('kind', 'cash', 'Cash (your current firm sells first, then sends cash)')}</fieldset>${nav('Continue')}</form>`;
+
+// Screen 2: sending-firm details, checked as you go (R1, R2)
+const s2 = () => `<form id="f2" novalidate><h1 tabindex="-1">Your current account</h1><p class="muted" id="ctx"></p>
+  <label for="from">Account type at your current firm</label><select id="from" data-k="from">${opts(T, S.from)}</select>
+  <div id="combo"></div>
+  <label for="firm">Current firm</label>
+  <select id="firm" data-k="firm" aria-describedby="e-firm"><option value="">Choose your firm</option>${opts(FIRMS, S.firm)}</select><p class="err" id="e-firm" aria-live="polite"></p>
+  <label for="num">Account number at your current firm</label>
+  <input id="num" data-k="num" value="${esc(S.num)}" autocomplete="off" spellcheck="false" aria-describedby="h-num e-num"><p class="hint" id="h-num"></p><p class="err" id="e-num" aria-live="polite"></p>
+  <label for="name">Name on your current account</label>
+  <input id="name" data-k="name" value="${esc(S.name)}" autocomplete="off" aria-describedby="h-name e-name"><p class="hint" id="h-name">Your Maple Invest profile name is ${PROFILE}.</p><p class="err" id="e-name" aria-live="polite"></p>
+  <div id="nmc" hidden>${check('nameOk', 'I confirm this is my account, even though the name differs')}</div>${nav('Continue')}</form>`;
+function paint() {
+  const b = block();
+  set('combo', b ? `<div role="alert" class="box bad"><p>${b[0]}${b[3] ? ' ' + b[3] : ''}</p><p>You can:</p><div class="row"><button type="button" data-act="${b[1]}">${b[2]}</button><button type="button" data-act="from">Pick another account type</button></div><p class="muted">Illustrative rules; verify per firm.</p></div>` : '');
+  for (const k of ['firm', 'num', 'name']) { const m = S.t[k] ? E[k]() : ''; set('e-' + k, m); $('#' + k).setAttribute('aria-invalid', !!m); }
+  const f = FIRMS[S.firm];
+  $('#h-num').textContent = f ? 'Example: ' + f.ex : 'Choose your current firm first.';
+  $('#ctx').textContent = `Opening a ${T[S.acct]} at Maple Invest, ${KIND[S.kind].toLowerCase()} transfer.`;
+  $('#nmc').hidden = !(S.t.name && S.name.trim() && !same(S.name));
+  $('#nameOk').checked = S.nameOk;
+}
+function next2() {
+  S.t = {firm: 1, num: 1, name: 1}; paint();
+  const bad = $('#main [aria-invalid="true"], #combo button');
+  bad ? bad.focus() : go(3);
+}
+
+// Screen 3: pre-submission checks (R3, R4)
+const s3 = () => { const f = FIRMS[S.firm], n = issues().length;
+  const head = '<form id="f3"><h1 tabindex="-1">Checks before you submit</h1>';
+  if (S.kind === 'cash') return head + `<p class="pill ok">All checks passed</p><p>A cash transfer has no holdings to check: ${f.n} sells your investments and sends cash. Nothing to flag in this demo.</p>${nav('Continue to review')}</form>`;
+  return head + `<p class="pill ${n ? 'warn' : 'ok'}" aria-live="polite">${n ? `${n} item${n > 1 ? 's need' : ' needs'} your attention` : 'All checks passed'}</p>
+  <p class="muted">Your holdings at ${f.n} (demo data):</p>
+  <ul class="hold">${HOLD.map(([a, b]) => `<li><span>${a}</span><span>${b}</span></li>`).join('')}<li><span>Cash</span><span>${money(CASH)}</span></li></ul>
+  <section class="box ${S.frac ? 'ok' : 'warn'}"><h2>${S.frac ? 'Done' : 'Needs attention'}: a holding that cannot move</h2>
+    <p>Maple Invest cannot hold fractional shares, so your 0.37 shares of Orchard Tech Inc. cannot move in kind. What should we do?</p>
+    ${radio('frac', 'sell', 'Sell it first at my current firm')}${radio('frac', 'cash', 'Move it as cash during the transfer')}</section>
+  <section class="box ${S.fee ? 'ok' : 'warn'}"><h2>${S.fee ? 'Done' : 'Needs attention'}: cash for the fee</h2>
+    <p>You are moving all your cash (${money(CASH)}) with your securities. ${f.n} may reject a request that moves all your cash, because it takes its ${money(f.fee)} transfer-out fee from your account (demo value).</p>
+    ${radio('fee', 'leave', `Leave ${money(f.fee)} behind for the fee (move ${money(CASH - f.fee)} cash)`)}${radio('fee', 'all', `Move all ${money(CASH)} anyway (the request may be rejected)`)}</section>${nav('Continue to review')}</form>`; };
+
+// Screen 4: review and e-sign (R5)
+const s4 = () => { const f = FIRMS[S.firm], is = issues();
+  return `<form id="f4"><h1 tabindex="-1">Review and sign</h1>${summary()}
+  ${is.length ? `<div role="alert" class="box bad"><h2>Signing is off until these are fixed</h2><ul>${is.map(i => `<li><button type="button" class="link" data-go="3">${i}</button></li>`).join('')}</ul></div>` : ''}
+  ${check('agree', `I authorise Maple Invest to request this transfer from ${f.n} for me.`)}
+  <label for="sign">Type your full name to sign (${PROFILE})</label><input id="sign" data-k="sign" value="${esc(S.sign)}" autocomplete="off">
+  <p class="hint">On submitting you get a reference number and the time. No paper form or mailing address.</p>
+  <div class="row"><button type="button" data-go="3">Back</button><button class="pri" id="go" disabled>Sign and submit</button></div></form>`; };
+const sync = () => { $('#go').disabled = !canSign(); };
+function sign() {
+  if (!canSign()) return;
+  S.ref = 'MI-' + String(Date.now()).slice(-6);
+  S.status = 'Submitted'; S.hist = [{s: 'Submitted', d: now()}]; go(5);
+}
+
+// Screen 5: status at the handoff, rejection reason and one-step fix (R6, R7)
+const s5 = () => { const f = FIRMS[S.firm], st = S.status, last = S.hist[S.hist.length - 1];
+  const cls = {Submitted: 'info', 'Accepted by sending firm': 'ok', 'Rejected: action needed': 'bad'}[st];
+  const msg = {Submitted: `${f.n} is reviewing your request. We will tell you here and by email if anything needs fixing.`,
+    'Accepted by sending firm': `${f.n} accepted your request. Tracking after acceptance is outside this concept.`}[st];
+  return `<h1 tabindex="-1">Your transfer request</h1><p class="muted">Reference ${S.ref} · to ${f.n}</p>
+  <p class="status pill ${cls}">${st}</p>${msg ? `<p>${msg}</p>` : ''}
+  <ol class="hist">${S.hist.map(h => `<li><strong>${h.s}</strong> <time>${h.d}</time>${h.n ? ` · ${h.n}` : ''}</li>`).join('')}</ol>
+  ${st !== 'Rejected: action needed' ? '' : `<section class="box bad"><h2>Why it was rejected</h2>
+    <p>${f.n} could not match the account number on your request to your account. This usually means a mistyped or missing digit. Nothing else needs to change.</p>
+    <p class="muted">We emailed you and sent an app message on ${last.d.slice(0, 10)}, within 1 business day of the rejection reaching Maple Invest.</p></section>
+  <form id="f5"><h2>Fix it in one step</h2>
+    <label for="fnum">Account number at ${f.n}</label><input id="fnum" value="${esc(S.num)}" autocomplete="off" spellcheck="false">
+    <label for="fsign">Type your full name to re-sign (${PROFILE})</label><input id="fsign" autocomplete="off">
+    <p class="err" id="e-fix" aria-live="polite"></p>
+    <p class="hint">Everything else stays as you signed it (details below).</p><div class="row"><button class="pri">Correct and re-sign</button></div></form>`}
+  <h2 style="margin-top:16px">Request details</h2>${summary()}`; };
+function fix() {
+  const v = $('#fnum').value;
+  const [m, id] = numMsg(v) ? [numMsg(v), 'fnum'] : norm(v) === norm(S.num) ? ['That is the number that was rejected. Check your latest statement.', 'fnum']
+    : !same($('#fsign').value) ? [`Type your full name (${PROFILE}) to re-sign.`, 'fsign'] : [''];
+  set('e-fix', m);
+  if (m) return $('#' + id).focus();
+  S.num = v; S.status = 'Submitted'; S.hist.push({s: 'Submitted', d: now(), n: 'account number corrected'}); render();
+}
+
+function render(fid) {
+  $('#main').innerHTML = `<p class="stepn">Step ${S.scr} of 5</p><div class="bar" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<i${i <= S.scr ? ' class="on"' : ''}></i>`).join('')}</div>` + [0, s1, s2, s3, s4, s5][S.scr]();
+  $('#req').textContent = REQ[S.scr];
+  document.querySelectorAll('[data-d]:not([data-d=reset])').forEach(b => b.disabled = S.status !== 'Submitted');
+  if (S.scr === 2) paint();
+  if (S.scr === 4) sync();
+  if (fid) $('#' + fid).focus();
+  else { scrollTo(0, 0); $('h1').focus({preventScroll: true}); }
+}
+const go = n => { S.scr = n; render(); };
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  const {go: g, act, d} = b.dataset;
+  if (g) go(+g);
+  else if (act === 'cash') { S.kind = 'cash'; paint(); }
+  else if (act === 'same') { S.acct = S.from; paint(); }
+  else if (act === 'from') $('#from').focus();
+  else if (d === 'reset') { S = init(); render(); }
+  else if (d) { S.status = d; S.hist.push({s: d, d: now()}); go(5); }
+});
+const store = e => {
+  const k = e.target.dataset.k;
+  if (k) S[k] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+  if (k === 'name') S.nameOk = false;
+  return k;
+};
+document.addEventListener('change', e => {
+  const k = store(e);
+  if (!k) return;
+  if (S.scr === 2) { if (k !== 'name') S.t[k] = 1; paint(); }
+  else if (S.scr === 3) render(e.target.id);
+  else if (S.scr === 4) sync();
+});
+// Once a field has been checked, keep checking as the person types, so a fixed error clears before they click on.
+document.addEventListener('input', e => { const k = store(e); if (S.scr === 2 && S.t[k]) paint(); if (k === 'sign') sync(); });
+document.addEventListener('submit', e => { e.preventDefault(); ({f1: () => { if (S.from !== 'nonreg') S.from = S.acct; go(2); }, f2: next2, f3: () => go(4), f4: sign, f5: fix})[e.target.id](); });
+render();
+</script>
+</body>
+</html>

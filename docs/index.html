@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transfer Readiness Check</title>
+<style>
+:root{--bg:#fff;--fg:#1c1c1e;--mut:#5b5b66;--line:#d4d4d8;--card:#f4f4f5;--acc:#1d4ed8;--soft:#dbeafe;--ph:#fef08a;--phfg:#713f12}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--fg:#ececf0;--mut:#a1a1aa;--line:#3f3f46;--card:#1d1d21;--acc:#8fb0ff;--soft:#1e2a4a;--ph:#4a3b0a;--phfg:#fde68a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:880px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:1.7rem;line-height:1.2;margin:0}
+.sub{color:var(--mut);margin:.2rem 0 .8rem}
+.note{border:1px solid var(--line);border-left:4px solid var(--acc);background:var(--card);padding:.5rem .75rem;margin:0 0 .6rem;font-size:.88em}
+.note p{margin:.15rem 0}
+.todo{background:var(--ph);color:var(--phfg);padding:.15rem .4rem;border-radius:3px}
+.cols{columns:340px 2;column-gap:28px}
+h2{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--acc);margin:.9rem 0 .25rem;break-after:avoid}
+.cols>h2:first-child{margin-top:0}
+p,ul{margin:.3rem 0}
+ul{padding-left:1.1rem}
+li{margin:.15rem 0}
+code{font:inherit;font-weight:600}
+mark{background:var(--ph);color:var(--phfg);font-size:.78em;padding:0 .25em;border-radius:3px;white-space:nowrap}
+figure{column-span:all;margin:.9rem 0 .4rem;overflow-x:auto}
+figcaption{font-size:.82em;color:var(--mut)}
+svg{display:block;width:100%;min-width:600px;height:auto;font-family:inherit}
+svg rect{fill:var(--card);stroke:var(--line);stroke-width:1}
+svg .bar{fill:var(--mut);stroke:none}
+svg .pick rect{fill:var(--soft);stroke:var(--acc);stroke-width:3}
+svg .pick .bar{fill:var(--acc);stroke:none}
+svg text{text-anchor:middle;fill:var(--fg)}
+svg .k{font-size:9px;fill:var(--mut)}
+svg .t{font-size:10.5px;font-weight:600}
+svg .n{font-size:24px;font-weight:700}
+svg .c{font-size:10px;fill:var(--mut)}
+svg .pick .c{fill:var(--acc);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:.88em;margin:.3rem 0;break-inside:avoid}
+th,td{border:1px solid var(--line);padding:.2rem .4rem;text-align:left;vertical-align:top}
+th{background:var(--card)}
+@page{size:letter;margin:.35in}
+@media print{
+:root{--bg:#fff;--fg:#111;--mut:#444;--line:#999;--card:#f2f2f2;--acc:#1d4ed8;--soft:#dbeafe;--ph:#fef08a;--phfg:#713f12}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-size:8.2pt;line-height:1.15}
+p,ul{margin:.2rem 0}
+li{margin:.08rem 0}
+th,td{padding:.12rem .35rem}
+main{max-width:none;padding:0}
+h1{font-size:15pt}
+figure{overflow:visible;margin:.4rem 0 .2rem}
+svg{min-width:0}
+h2{margin-top:.4rem}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Transfer readiness check</h1>
+<p class="sub">Product discovery: moving an investment account between Canadian firms &middot; October 2026</p>
+<div class="note">
+<p><strong>Self-initiated concept; public data; not affiliated with any institution.</strong> Pilot of 59 public posts; tags AI-suggested, not individually re-checked by me.</p>
+<p>Made by directing AI agents: they collected and tagged the posts, drafted the analysis, documents and prototype, and reviewed each other's work; I set the goal and constraints and approved the problem choice and the final deliverables.</p>
+</div>
+
+<div class="cols">
+<h2>Problem</h2>
+<p>In 59 public posts, 7 (11.9%) describe a rejected request or form error, all at the handoff between firms (step 4); 4 were still stuck when posted. Each re-filing restarts the wait: &ldquo;Re did the paper work. Rejected again.&rdquo; (P003, 2018)</p>
+
+<h2>What I did</h2>
+<p>Collected 59 public posts with AI help (27 forum, 31 review-site, 1 app-store; no Reddit), so bad experiences are over-represented. Mapped the journey in 8 steps; 5 hypotheses were frozen before any post was read. AI suggested the tags; a blind AI re-tag of 20 rows agreed on pain 19 times and on step 15.</p>
+
+<figure>
+<svg viewBox="0 0 754 138" role="img" aria-labelledby="mt"><title id="mt">Journey map: posts per step. Step 4 is chosen.</title><g data-step="1" data-count="1"><rect x="4" y="6" width="88" height="96" rx="6"/><text class="k" x="48" y="21">Step 1</text><text class="t" x="48" y="36">Choosing</text><text class="t" x="48" y="48">a firm</text><text class="n" x="48" y="82">1</text><rect class="bar" x="12" y="90" width="3.6" height="6" rx="3"/></g><g data-step="2" data-count="1"><rect x="98" y="6" width="88" height="96" rx="6"/><text class="k" x="142" y="21">Step 2</text><text class="t" x="142" y="36">Opening</text><text class="t" x="142" y="48">new account</text><text class="n" x="142" y="82">1</text><rect class="bar" x="106" y="90" width="3.6" height="6" rx="3"/></g><g data-step="3" data-count="5"><rect x="192" y="6" width="88" height="96" rx="6"/><text class="k" x="236" y="21">Step 3</text><text class="t" x="236" y="36">Submitting</text><text class="t" x="236" y="48">request</text><text class="n" x="236" y="82">5</text><rect class="bar" x="200" y="90" width="18.0" height="6" rx="3"/></g><g data-step="4" data-count="16" data-chosen="1" class="pick"><rect x="286" y="6" width="88" height="96" rx="6"/><text class="k" x="330" y="21">Step 4</text><text class="t" x="330" y="36">Request</text><text class="t" x="330" y="48">between firms</text><text class="n" x="330" y="82">16</text><rect class="bar" x="294" y="90" width="57.6" height="6" rx="3"/><text class="c" x="330" y="119">Chosen</text><text class="c" x="330" y="131">7 rejected</text></g><g data-step="5" data-count="20"><rect x="380" y="6" width="88" height="96" rx="6"/><text class="k" x="424" y="21">Step 5</text><text class="t" x="424" y="36">Waiting</text><text class="n" x="424" y="82">20</text><rect class="bar" x="388" y="90" width="72.0" height="6" rx="3"/><text class="c" x="424" y="119">Not chosen</text><text class="c" x="424" y="131">14 slow</text></g><g data-step="6" data-count="5"><rect x="474" y="6" width="88" height="96" rx="6"/><text class="k" x="518" y="21">Step 6</text><text class="t" x="518" y="36">Assets</text><text class="t" x="518" y="48">moving</text><text class="n" x="518" y="82">5</text><rect class="bar" x="482" y="90" width="18.0" height="6" rx="3"/></g><g data-step="7" data-count="6"><rect x="568" y="6" width="88" height="96" rx="6"/><text class="k" x="612" y="21">Step 7</text><text class="t" x="612" y="36">Fees and</text><text class="t" x="612" y="48">refunds</text><text class="n" x="612" y="82">6</text><rect class="bar" x="576" y="90" width="21.6" height="6" rx="3"/><text class="c" x="612" y="119">Not chosen</text><text class="c" x="612" y="131">6 fee surprise</text></g><g data-step="8" data-count="5"><rect x="662" y="6" width="88" height="96" rx="6"/><text class="k" x="706" y="21">Step 8</text><text class="t" x="706" y="36">After</text><text class="t" x="706" y="48">arrival</text><text class="n" x="706" y="82">5</text><rect class="bar" x="670" y="90" width="18.0" height="6" rx="3"/></g></svg>
+<figcaption>Posts per step, in 59 public posts. Step counts come from AI-suggested tags.</figcaption>
+</figure>
+
+<h2>What I found</h2>
+<p>In 59 public posts, steps 4 and 5 hold 36 (61.0%). The three biggest step-by-pain cells:</p>
+<ul>
+<li>Waiting &times; Slow: 14 (23.7%)</li>
+<li>Request between firms &times; Rejected or form error: 7 (11.9%)</li>
+<li>Fees and refunds &times; Fee surprise: 6 (10.2%)</li>
+</ul>
+<p>Of 5 hypotheses, 2 were confirmed (one by a single row), 1 wrong, 2 unclear. The posts show that failures exist, not how often: there is no count of uneventful transfers.</p>
+
+<h2>The decision and why</h2>
+<p><strong>Chosen: rejections at the handoff (step 4)</strong>, as a receiving-firm product: a digital, pre-checked request that the sending firm accepts first time.</p>
+<ul>
+<li><strong>Controllable:</strong> the receiving firm starts the request and owns the form.</li>
+<li><strong>Measurable:</strong> first-time acceptance rate (first-pass yield).</li>
+<li><strong>Compounding:</strong> each rejection restarts the wait, so fewer should shorten part of the slow cell.</li>
+<li><strong>Fit:</strong> Lean right-first-time and error-proofing, applied to a service handoff.</li>
+</ul>
+<p><strong>Not chosen</strong>, in 59 public posts: <strong>A, slow processing</strong> (14): the fix appears to sit mostly with the sending firm. Notes suggest the sending firm in 9 of the 14 elapsed-time rows (my reading; review pages are organised by the firm reviewed). That a sending firm has little reason to speed departures is an assumption, untested. <strong>B, no visible status</strong> (4): too thin alone, so I folded in its &ldquo;show the reason and the fix&rdquo;. <strong>D, transfer-out fees</strong> (6): clearer causes and partly controllable (the expected fee is surfaced in R4), but fee levels sit with the sending firm.</p>
+<p><strong>Trade-off:</strong> A is twice as frequent as C in 59 public posts (14 vs 7). This is accepted, but C&rsquo;s evidence is thin and must be sized from a firm&rsquo;s data before any build.</p>
+
+<h2>What I&rsquo;d build</h2>
+<p>A pre-checked, digital request for a fictional firm, Maple Invest; <a href="prototype/">try the clickable prototype</a>. MVP must-haves (RRSP and TFSA, in-kind and cash), each tied to a post:</p>
+<ul>
+<li><strong>R1</strong> Check sending-account details before submission (P003)</li>
+<li><strong>R2</strong> Block account-type and transfer-kind combinations the rules disallow, and offer an alternative (P015)</li>
+<li><strong>R3&ndash;R4</strong> Warn about holdings the firm cannot hold, and about cash left for the old firm&rsquo;s fee (P044, P043)</li>
+<li><strong>R5</strong> Complete and e-sign online; no paper to lose (P056, P059)</li>
+<li><strong>R6</strong> Rejection reason in plain words and a one-step fix, within 1 business day (P003, P029, P043)</li>
+<li><strong>R7</strong> Status at the handoff: Submitted, Accepted, or Rejected: action needed (P018, P050)</li>
+</ul>
+<p>Six Must stories (S1&ndash;S6) carry Given/When/Then criteria. Later: rejection log and auto-routing (Should), chase alerts (Could). Out of scope: sending-firm speed, fees, status after acceptance, account locks.</p>
+
+<h2>How I&rsquo;d measure it</h2>
+<p>Set before designing. Baselines come from a firm&rsquo;s 12 months of logs; targets are assumptions to validate, not commitments.</p>
+<table>
+<tr><th>Metric</th><th>Assumed target</th></tr>
+<tr><td><strong>Primary: first-time acceptance rate</strong> (accepted on first submission &divide; submitted)</td><td>Rejections in the preventable categories down 50%; overall effect = preventable share &times; 50%</td></tr>
+<tr><td>Rework per transfer (re-submissions plus manual touches)</td><td>Down 30%</td></tr>
+<tr><td>Days lost per rejection</td><td>Down 50%</td></tr>
+<tr><td>Guardrail: completion of started digital requests</td><td>No more than 2 points below baseline</td></tr>
+</table>
+
+<h2>What I&rsquo;d do next</h2>
+<ul>
+<li>Confirm or correct all 59 tags myself, then re-run every count here.</li>
+<li>Interview 5 recent movers (at least 2 rejected); test the prototype with 5 people (pass: completed unaided).</li>
+<li>With a firm&rsquo;s 12 months of transfer-in data, apply a decision rule (assumed): if under a third of rejections are preventable at intake, revisit A or B before building.</li>
+</ul>
+<p>Biggest risk: the assumption that many rejections are preventable at intake is unproven; in 59 public posts, 3 of the 7 give no cause.</p>
+
+<h2>Skills shown</h2>
+<p>Desk research from public posts &middot; process mapping &middot; prioritisation with stated trade-offs &middot; requirements and testable acceptance criteria &middot; success metrics before solution &middot; prototyping &middot; using AI with disclosure</p>
+</div>
+</main>
+</body>
+</html>
